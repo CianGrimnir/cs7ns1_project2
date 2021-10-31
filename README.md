@@ -2,7 +2,7 @@
 Captcha Solving Using TensorFlow
 
 ## Overview 
-We generated dataset and trained model for different length, ranging from 1 to 6. We have created 6 models for each length (1-6) and classified our dataset using this 6 models.
+We generated dataset and trained model for different captcha length, ranging from 1 to 6. We have created 6 models for each captcha length (1-6) and classified our dataset using this 6 models.
 
 ## Generate training and validating datasets
 
@@ -17,13 +17,13 @@ python3 ./generate.py --width 128 --height 64 --length 6 --symbols symbols.txt -
 
 
 ## Training the model
-#### Train model for each length (1-6)
+#### Train model for each captcha length (1-6)
 ```
 python3 ./train_org.py --width 128 --height 64 --length 6 --symbols symbols.txt --batch-size 32 --epochs 5 --output-model label6 --train-dataset training_data --validate-dataset validating_data
 ```
 
 ## Classifying the dataset
-### Make sure to place all the model on parent directory. Classify the images for each dir with appropriate model based on length
+### Make sure to place all the model on parent directory. Classify the images for each dir with appropriate model based on captcha length
 ```
 python3 classify.py --model-name label6 --captcha-dir images/6 --output classified_6.csv --symbols symbols.txt
 ```
