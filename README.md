@@ -1,7 +1,7 @@
 # cs7ns1_project2
 Captcha Solving Using TensorFlow
 
-##Overview 
+## Overview 
 We generated dataset and trained model for different length, ranging from 1 to 6. We have created 6 models for each length (1-6) and classified our dataset using this 6 models.
 
 ## Generate training and validating datasets
