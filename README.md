@@ -24,6 +24,7 @@ python3 ./scripts/train_org.py --width 128 --height 64 --length <CAPTCHA_LENGTH>
 
 ## Classifying the dataset
 ### Make sure to place all the model on parent directory. Classify the images for each image dirs with appropriate model based on captcha length.
+### rename the image directory of the user to images/
 ```
 python3 ./scripts/classify.py --model-name label6 --captcha-dir images/6 --output classified_6.csv --symbols symbols.txt
 
