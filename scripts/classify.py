@@ -17,12 +17,21 @@ def decode(characters, y):
     y = numpy.argmax(numpy.array(y), axis=2)[:,0]
     return ''.join([characters[x] for x in y])
 
+def eliminate_space_or_duplicate(decoded_str):
+    if ' ' in decoded_str:
+        decoded_str = decoded_str.replace(" ", "")
+    else:
+        decoded_str = decoded_str[:-1]
+    return decoded_str
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model-name', help='Model name to use for classification', type=str)
     parser.add_argument('--captcha-dir', help='Where to read the captchas to break', type=str)
     parser.add_argument('--output', help='File where the classifications should be saved', type=str)
     parser.add_argument('--symbols', help='File with the symbols to use in captchas', type=str)
+    parser.add_argument('--length', help='File with the symbols to use in captchas', type=str)
     args = parser.parse_args()
 
     if args.model_name is None:
@@ -40,7 +49,7 @@ def main():
     if args.symbols is None:
         print("Please specify the captcha symbols file")
         exit(1)
-
+    
     symbols_file = open(args.symbols, 'r')
     captcha_symbols = symbols_file.readline().strip()
     symbols_file.close()
@@ -66,8 +75,11 @@ def main():
                 (c, h, w) = image.shape
                 image = image.reshape([-1, c, h, w])
                 prediction = model.predict(image)
-                output_file.write(x + "," + decode(captcha_symbols, prediction) + "\n")
-
+                if args.captcha_dir.split('/')[1] == "1": 
+                    predicted_value = decoded_captcha = eliminate_space_or_duplicate(decode(captcha_symbols, prediction))
+                else:
+                    predicted_value = decode(captcha_symbols, prediction)
+                output_file.write(x + "," + predicted_value + "\n")
                 print('Classified ' + x)
 
 if __name__ == '__main__':
