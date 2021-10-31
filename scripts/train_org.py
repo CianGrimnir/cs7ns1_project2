@@ -138,8 +138,8 @@ def main():
     # assert len(physical_devices) > 0, "No GPU available!"
     # tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-    # with tf.device('/device:GPU:0'):
-    with tf.device('/device:CPU:0'):
+    with tf.device('/device:GPU:0'):
+    # with tf.device('/device:CPU:0'):
     # with tf.device('/device:XLA_CPU:0'):
         model = create_model(args.length, len(captcha_symbols), (args.height, args.width, 3))
 
